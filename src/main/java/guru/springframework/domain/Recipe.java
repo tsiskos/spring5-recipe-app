@@ -10,14 +10,16 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String despription;
+    private String description;
     private Integer prepTime;
     private Integer cookTime;
     private Integer servings;
     private String source;
     private String url;
     private String directions;
-    // todo add dificulty
+
+    @Enumerated(value = EnumType.STRING)
+    private Difficulty difficulty;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients;
@@ -28,6 +30,12 @@ public class Recipe {
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
 
+    @ManyToMany
+    @JoinTable(name="recipe_category",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name="category_id"))
+    private Set<Category> categories;
+
     public Long getId() {
         return id;
     }
@@ -36,12 +44,12 @@ public class Recipe {
         this.id = id;
     }
 
-    public String getDespription() {
-        return despription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDespription(String despription) {
-        this.despription = despription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Integer getPrepTime() {
@@ -114,5 +122,21 @@ public class Recipe {
 
     public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 }
