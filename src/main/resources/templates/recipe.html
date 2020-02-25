@@ -2,11 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8"/>
-        <title>Recipe Home</title>
+        <title th:text="${recipe.getDescription()}"></title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
               crossorigin="anonymous"
-        th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css}">
+              th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css}">
 
         <script th:src="@{/webjars/jquery/3.4.1/dist/jquery.min.js}"></script>
         <!-- Latest compiled and minified JavaScript -->
@@ -15,35 +15,31 @@
                 th:src="@{/webjars/bootstrap/3.4.1/js/bootstrap.min.js}"></script>
     </head>
     <body>
+
     <div class="container-fluid" style="margin-top: 20px">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h1 class="panel-title">My Recipes</h1>
+                        <h1 class="panel-title" th:text="${recipe.getDescription()}">Recipe Title</h1>
                     </div>
                     <div class="panel-body">
-                       <div class="table-responsive" th:if="${not #lists.isEmpty(recipes)}">
-                         <table class="table table-hover">
-                            <thead class="thead-inverse">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Description</th>
-                                </tr>
-                            </thead>
-                            <tr th:each="recipe : ${recipes}">
-                                <td th:text="${recipe.getId()}">empty</td>
-                                <td th:text="${recipe.getDescription()}">empty</td>
-                                <td> <a th:href="@{'/recipe/' + ${recipe.id}}">View</a></td>
-                            </tr>
-                        </table>
+                        <dl class="row">
+                            <dt class="col-sm-3">Categories:</dt>
+                            <dd class="col-sm-9">adasdasdasd</dd>
+
+                            <dt class="col-sm-3">Prep Time:</dt>
+                            <dd class="col-sm-9">adasdasdasd</dd>
+
+                            <dt class="col-sm-3">Cook Time:</dt>
+                            <dd class="col-sm-9">adasdasdasd</dd>
+                        </dl>
                     </div>
-                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 
     </body>
-
 </html>
