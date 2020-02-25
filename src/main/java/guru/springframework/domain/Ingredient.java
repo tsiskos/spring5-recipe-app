@@ -18,6 +18,10 @@ public class Ingredient {
     @ManyToOne
     private Recipe recipe;
 
+    public Ingredient(){
+
+    }
+
     public Ingredient(String description, BigDecimal ammount, UnitOfMeasure uom) {
         this.description = description;
         this.ammount = ammount;
@@ -56,5 +60,13 @@ public class Ingredient {
 
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
+    }
+
+    public UnitOfMeasure getUom() {
+        return uom;
+    }
+
+    public void setUom(UnitOfMeasure uom) {
+        this.uom = uom;
     }
 }

@@ -19,22 +19,70 @@
     <div class="container-fluid" style="margin-top: 20px">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-                <div class="panel panel-primary">
+                <div class="panel panel-primary ">
                     <div class="panel-heading">
                         <h1 class="panel-title" th:text="${recipe.getDescription()}">Recipe Title</h1>
                     </div>
                     <div class="panel-body">
-                        <dl class="row">
-                            <dt class="col-sm-3">Categories:</dt>
-                            <dd class="col-sm-9">adasdasdasd</dd>
+                        <div class="row">
+                            <dl>
+                                <dt class="col-sm-3">Categories:</dt>
+                                <dd class="col-sm-9">
+                                    <ul class="list-inline">
+                                        <li  th:each="category : ${recipe.getCategories()}">
+                                            <span th:text="${category.getDescription()}"></span>
+                                        </li>
+                                    </ul>
+                                </dd>
 
-                            <dt class="col-sm-3">Prep Time:</dt>
-                            <dd class="col-sm-9">adasdasdasd</dd>
+                                <dt class="col-sm-3">Prep Time:</dt>
+                                <dd class="col-sm-9"><span th:text="${recipe.getPrepTime()}"></span></dd>
 
-                            <dt class="col-sm-3">Cook Time:</dt>
-                            <dd class="col-sm-9">adasdasdasd</dd>
-                        </dl>
+                                <dt class="col-sm-3">Cook Time:</dt>
+                                <dd class="col-sm-9"><span th:text="${recipe.getCookTime()}"></span></dd>
+
+                                <dt class="col-sm-3">Servings:</dt>
+                                <dd class="col-sm-9"><span th:text="${recipe.getServings()}"></span></dd>
+
+                                <dt class="col-sm-3">Difficulty:</dt>
+                                <dd class="col-sm-9"><span th:text="${recipe.getDifficulty().name()}"></span></dd>
+
+                                <dt class="col-sm-3">Source:</dt>
+                                <dd class="col-sm-9"><span th:text="${recipe.getSource()}"></span></dd>
+
+                            </dl>
+                        </div>
                     </div>
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Ingredients</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row p-md-5">
+                            <ul>
+                                <li th:each="ingredient: ${recipe.getIngredients()}">
+                                    <span th:text="${ingredient.getAmmount() +' '+ ingredient.getUom().getUom()+' of '+ingredient.getDescription()}"></span>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Execution</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row-md-5">
+                            <span th:text="${recipe.getDirections()}"></span>
+                        </div>
+                    </div>
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Notes</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row-md-5">
+                            <p th:text="${recipe.getNotes().getRecipeNotes()}"></p>
+                        </div>
+                    </div>
+
 
                 </div>
             </div>
