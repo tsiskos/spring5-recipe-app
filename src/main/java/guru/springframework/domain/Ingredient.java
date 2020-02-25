@@ -22,6 +22,7 @@ public class Ingredient {
         this.description = description;
         this.ammount = ammount;
         this.uom = uom;
+
     }
 
 
