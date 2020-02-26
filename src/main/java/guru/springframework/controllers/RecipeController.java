@@ -5,9 +5,7 @@ import guru.springframework.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class RecipeController {
@@ -22,5 +20,15 @@ public class RecipeController {
         model.addAttribute("recipe",recipe);
 
         return "recipe";
+    }
+
+    @RequestMapping("recipe/form")
+    public String getRecipeForm(){
+        return "recipe_form";
+    }
+
+    @RequestMapping(path = "recipe/add", method= RequestMethod.POST)
+    public String addRecipe(@ModelAttribute Recipe newRecipe){
+        return "success_add_recipe";
     }
 }
