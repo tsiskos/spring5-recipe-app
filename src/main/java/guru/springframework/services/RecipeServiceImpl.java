@@ -29,4 +29,9 @@ public class RecipeServiceImpl implements RecipeService{
         Optional<Recipe> recipeOptional= recipeRepository.findById(id);
         return recipeOptional.isPresent()?recipeOptional.get():null;
     }
+
+    @Override
+    public Recipe addRecipe(Recipe newRecipe) {
+        return recipeRepository.save(newRecipe);
+    }
 }
