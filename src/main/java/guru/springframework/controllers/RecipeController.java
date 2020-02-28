@@ -1,5 +1,6 @@
 package guru.springframework.controllers;
 
+import guru.springframework.domain.Ingredient;
 import guru.springframework.domain.Recipe;
 import guru.springframework.dtos.IngredientListWraperDTO;
 import guru.springframework.services.CategoryService;
@@ -9,8 +10,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
+import java.io.IOException;
+import java.util.HashMap;
+
 @Controller
 public class RecipeController {
+
+
 
     @Autowired
     private RecipeService recipeService;
@@ -29,18 +38,14 @@ public class RecipeController {
 
     @RequestMapping("recipe/form")
     public String getRecipeForm(Model model){
-
-        model.addAttribute("recipe", new Recipe());
+        Recipe recipe = new Recipe();
+        recipe.getIngredients().add(new Ingredient());
+        model.addAttribute("recipe",recipe);
         model.addAttribute("categories",categoryService.getCategories());
-        model.addAttribute("ingredients", new IngredientListWraperDTO());
         return "recipe_form";
     }
 
-    @RequestMapping(path = "recipe/add", method= RequestMethod.POST)
-    public String addRecipe(@ModelAttribute("recipe") Recipe newRecipe, Model model){
-        System.out.println("New Recipe: "+ newRecipe.getDescription());
-        Recipe confirmedRecipe =  recipeService.addRecipe(newRecipe);
-        model.addAttribute("recipe", confirmedRecipe);
-        return "success_add_recipe";
-    }
+
+
+
 }
