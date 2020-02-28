@@ -1,5 +1,8 @@
 package guru.springframework.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -16,6 +19,7 @@ public class Ingredient {
     private UnitOfMeasure uom;
 
     @ManyToOne
+    @JsonBackReference
     private Recipe recipe;
 
     public Ingredient(){
@@ -59,7 +63,9 @@ public class Ingredient {
     }
 
     public void setRecipe(Recipe recipe) {
+
         this.recipe = recipe;
+
     }
 
     public UnitOfMeasure getUom() {

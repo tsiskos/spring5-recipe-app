@@ -1,5 +1,7 @@
 package guru.springframework.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.*;
 
@@ -15,7 +17,7 @@ public class Recipe {
     private Integer cookTime;
     private Integer servings;
     private String source;
-    private String url;
+
 
     @Lob
     private String directions;
@@ -23,7 +25,8 @@ public class Recipe {
     @Enumerated(value = EnumType.STRING)
     private Difficulty difficulty;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "recipe")
+    @JsonManagedReference
     private Set<Ingredient> ingredients = new HashSet<>();
 
     @Lob
@@ -93,14 +96,6 @@ public class Recipe {
         this.source = source;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public String getDirections() {
         return directions;
     }
@@ -127,17 +122,13 @@ public class Recipe {
     }
 
     public Recipe addIngredient(Ingredient ingredient){
-        ingredient.setRecipe(this);
         this.ingredients.add(ingredient);
+        ingredient.setRecipe(this);
         return this;
     }
 
     public Set<Ingredient> getIngredients() {
         return ingredients;
-    }
-
-    public void setIngredients(Set<Ingredient> ingredients) {
-        this.ingredients = ingredients;
     }
 
     public Difficulty getDifficulty() {
