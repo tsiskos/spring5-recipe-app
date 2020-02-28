@@ -1,6 +1,7 @@
 package guru.springframework.controllers;
 
 import guru.springframework.domain.Recipe;
+import guru.springframework.dtos.IngredientListWraperDTO;
 import guru.springframework.services.CategoryService;
 import guru.springframework.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ public class RecipeController {
 
         model.addAttribute("recipe", new Recipe());
         model.addAttribute("categories",categoryService.getCategories());
+        model.addAttribute("ingredients", new IngredientListWraperDTO());
         return "recipe_form";
     }
 

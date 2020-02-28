@@ -1,39 +1,129 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Add New Recipe</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+              crossorigin="anonymous"
+              th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css}">
+
+        <script th:src="@{/webjars/jquery/3.4.1/dist/jquery.min.js}"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+                crossorigin="anonymous"
+                th:src="@{/webjars/bootstrap/3.4.1/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/global_utils.js}"></script>
     </head>
     <body>
-        <h1>Add new recipe</h1>
-        <form action="#" th:action="@{/recipe/add}" th:object="${recipe}" method="post">
-            <label for="recipe_description">Title:</label>
-            <input id="recipe_description" type="text" th:field="${recipe.description}"/>
-            <br>
-            <label for="recipe_prepTime">Preparation Time:</label>
-            <input id="recipe_prepTime" type="text" th:field="${recipe.prepTime}"/>
-            <br>
-            <label for="recipe_cookTime">Cook Time:</label>
-            <input id="recipe_cookTime" type="text" th:field="${recipe.cookTime}"/>
-            <br>
-            <label for="recipe_servings">Servings:</label>
-            <input id="recipe_servings" type="text" th:field="${recipe.servings}"/>
-            <br>
-            <label for="recipe_difficulty">Difficulty:</label>
-            <select id="recipe_difficulty" name="difficulty" th:field="${recipe.difficulty}">
-                <option th:each="difficultyOpt : ${T(guru.springframework.domain.Difficulty).values()}"
-                        th:value="${difficultyOpt}" th:text="${difficultyOpt}"></option>
-            </select>
-            <br>
-            <label for="recipe_category">Category:</label>
-            <select id="recipe_category" name="category" th:field="${recipe.categories}">
-                <option th:each="category : ${categories}"
-                        th:value="${category.id}" th:text="${category.description}"></option>
-            </select>
-            <br>
-            <label for="recipe_source">Source:</label>
-            <input id="recipe_source" type="text" th:field="${recipe.source}"/>
-            <br>
-            <br>
-            <input type="submit">
-        </form>
+        <div class="container-fluid" style="margin-top: 20px">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h2> Add new recipe</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <form action="#" th:action="@{/recipe/add}" th:object="${recipe}" method="post">
+                                <div class="form-group">
+                                    <label for="recipe_description">Title:</label>
+                                    <input class="form-control" id="recipe_description" type="text" th:field="${recipe.description}"/>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="recipe_prepTime">Preparation Time:</label>
+                                        <input class="form-control" id="recipe_prepTime" type="text" th:field="${recipe.prepTime}"/>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="recipe_cookTime">Cook Time:</label>
+                                        <input class="form-control" id="recipe_cookTime" type="text" th:field="${recipe.cookTime}"/>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="recipe_servings">Servings:</label>
+                                        <input class="form-control" id="recipe_servings" type="text" th:field="${recipe.servings}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="recipe_difficulty">Difficulty:</label>
+                                    <select class="form-control" id="recipe_difficulty" name="difficulty" th:field="${recipe.difficulty}">
+                                        <option th:each="difficultyOpt : ${T(guru.springframework.domain.Difficulty).values()}"
+                                                th:value="${difficultyOpt}" th:text="${difficultyOpt}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="recipe_category">Category:</label>
+                                    <select class="form-control" id="recipe_category" name="category" th:field="${recipe.categories}">
+                                        <option th:each="category : ${categories}"
+                                                th:value="${category.id}" th:text="${category.description}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="ingredient" id="ingredient-form-1">
+                                            <input th:type="text" th:field="${recipe.ingredients[0].description}"/>
+                                            <input th:type="text" th:field="${recipe.ingredients[0].ammount}"/>
+                                        </div>
+                                        <div class="ingredient" id="ingredient-form-2">
+                                            <input th:type="text" th:field="${recipe.ingredients[1].description}"/>
+                                            <input th:type="text" th:field="${recipe.ingredients[1].ammount}"/>
+                                        </div>
+                                        <div class="ingredient" id="ingredient-form-3">
+                                            <input th:type="text" th:field="${recipe.ingredients[2].description}"/>
+                                            <input th:type="text" th:field="${recipe.ingredients[2].ammount}"/>
+                                        </div>
+                                        <div class="ingredient" id="ingredient-form-4">
+                                            <input th:type="text" th:field="${recipe.ingredients[3].description}"/>
+                                            <input th:type="text" th:field="${recipe.ingredients[3].ammount}"/>
+                                        </div>
+                                        <div class="ingredient" id="ingredient-form-5">
+                                            <input th:type="text" th:field="${recipe.ingredients[4].description}"/>
+                                            <input th:type="text" th:field="${recipe.ingredients[4].ammount}"/>
+                                        </div>
+                                        <div class="ingredient" id="ingredient-form-6">
+                                            <input th:type="text" th:field="${recipe.ingredients[5].description}"/>
+                                            <input th:type="text" th:field="${recipe.ingredients[5].ammount}"/>
+                                        </div>
+                                        <div class="ingredient" id="ingredient-form-7">
+                                            <input th:type="text" th:field="${recipe.ingredients[6].description}"/>
+                                            <input th:type="text" th:field="${recipe.ingredients[6].ammount}"/>
+                                        </div>
+                                        <div class="ingredient" class="ingredient" id="ingredient-form-8">
+                                            <input th:type="text" th:field="${recipe.ingredients[7].description}"/>
+                                            <input th:type="text" th:field="${recipe.ingredients[7].ammount}"/>
+                                        </div>
+                                        <div class="ingredient" id="ingredient-form-9">
+                                            <input th:type="text" th:field="${recipe.ingredients[8].description}"/>
+                                            <input th:type="text" th:field="${recipe.ingredients[8].ammount}"/>
+                                        </div>
+                                        <div class="ingredient" id="ingredient-form-10">
+                                            <input th:type="text" th:field="${recipe.ingredients[9].description}"/>
+                                            <input th:type="text" th:field="${recipe.ingredients[9].ammount}"/>
+                                        </div>
+                                    </div>
+                                    <button type="button" id="add-ingredient">Add Ingredient</button>
+                                </div>
+                                <div class="form-group">
+                                    <label for="recipe_instructions">Instructions:</label>
+                                    <textarea class="form-control" id="recipe_instructions"  th:field="${recipe.directions}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="recipe_notes">Instructions:</label>
+                                    <textarea class="form-control" id="recipe_notes"  th:field="${recipe.notes.recipeNotes}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="recipe_source">Source:</label>
+                                    <input class="form-control" id="recipe_source" type="text" th:field="${recipe.source}"/>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Create</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
