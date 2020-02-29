@@ -2,9 +2,11 @@ package guru.springframework.controllers;
 
 import guru.springframework.domain.Ingredient;
 import guru.springframework.domain.Recipe;
+import guru.springframework.domain.UnitOfMeasure;
 import guru.springframework.dtos.IngredientListWraperDTO;
 import guru.springframework.services.CategoryService;
 import guru.springframework.services.RecipeService;
+import guru.springframework.services.UnitOfMeasureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +29,9 @@ public class RecipeController {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private UnitOfMeasureService unitOfMeasureService;
+
     @RequestMapping("recipe/{id}")
     public String getRecipeById(@PathVariable(name="id") Long id, Model model){
 
@@ -42,6 +47,7 @@ public class RecipeController {
         recipe.getIngredients().add(new Ingredient());
         model.addAttribute("recipe",recipe);
         model.addAttribute("categories",categoryService.getCategories());
+        model.addAttribute("units",unitOfMeasureService.getUoMs());
         return "recipe_form";
     }
 

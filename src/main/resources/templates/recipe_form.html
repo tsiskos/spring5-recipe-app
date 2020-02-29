@@ -11,6 +11,11 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
                 crossorigin="anonymous"
                 th:src="@{/webjars/bootstrap/3.4.1/js/bootstrap.min.js}"></script>
+        <script  th:inline="javascript" >
+            /*<![CDATA[*/
+            var units = [[${units}]];
+            /*]]>*/
+        </script>
         <script th:src="@{/js/global_utils.js}"></script>
     </head>
     <body>
@@ -26,35 +31,35 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <form action="#" th:action="@{/recipe/add}" th:object="${recipe}" method="post">
+                            <form action="#"  method="post">
                                 <div class="form-group">
                                     <label for="recipe_description">Title:</label>
-                                    <input class="form-control" id="recipe_description" type="text" th:field="${recipe.description}"/>
+                                    <input class="form-control" id="recipe_description" type="text" />
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <label for="recipe_prepTime">Preparation Time:</label>
-                                        <input class="form-control" id="recipe_prepTime" type="text" th:field="${recipe.prepTime}"/>
+                                        <input class="form-control" id="recipe_prepTime" type="text"/>
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="recipe_cookTime">Cook Time:</label>
-                                        <input class="form-control" id="recipe_cookTime" type="text" th:field="${recipe.cookTime}"/>
+                                        <input class="form-control" id="recipe_cookTime" type="text" />
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="recipe_servings">Servings:</label>
-                                        <input class="form-control" id="recipe_servings" type="text" th:field="${recipe.servings}"/>
+                                        <input class="form-control" id="recipe_servings" type="text" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="recipe_difficulty">Difficulty:</label>
-                                    <select class="form-control" id="recipe_difficulty" name="difficulty" th:field="${recipe.difficulty}">
+                                    <select class="form-control" id="recipe_difficulty" name="difficulty" >
                                         <option th:each="difficultyOpt : ${T(guru.springframework.domain.Difficulty).values()}"
                                                 th:value="${difficultyOpt}" th:text="${difficultyOpt}"></option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="recipe_category">Category:</label>
-                                    <select class="form-control" id="recipe_category" name="category" th:field="${recipe.categories}">
+                                    <select class="form-control" id="recipe_category" name="category" >
                                         <option th:each="category : ${categories}"
                                                 th:value="${category.id}" th:text="${category.description}"></option>
                                     </select>
@@ -66,24 +71,35 @@
                                                 <label for="ingredient_1">Ingredient 1 Name:</label>
                                                 <input class="form-control" name="ingredient_1" type="text" id="ingredient_1"/>
                                             </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="ingredient_1">Amount:</label>
+                                                <input class="form-control" name="amount_1" type="text" id="amount_1"/>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="unit_1">Unit:</label>
+                                                <select class="form-control" id="unit_1" name="unit" >
+                                                    <option th:each="unit : ${units}"
+                                                            th:value="${unit.id}" th:text="${unit.uom}"></option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </fieldset>
                                     <button type="button" name="addIngredient">Add Ingredient</button>
                                 </div>
                                 <div class="form-group">
                                     <label for="recipe_instructions">Instructions:</label>
-                                    <textarea class="form-control" id="recipe_instructions"  th:field="${recipe.directions}"/>
+                                    <textarea class="form-control" id="recipe_instructions"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="recipe_notes">Notes:</label>
-                                    <textarea class="form-control" id="recipe_notes"  th:field="${recipe.notes.recipeNotes}"/>
+                                    <textarea class="form-control" id="recipe_notes"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="recipe_source">Source:</label>
-                                    <input class="form-control" id="recipe_source" type="text" th:field="${recipe.source}"/>
+                                    <input class="form-control" id="recipe_source" type="text" />
                                 </div>
 
-                                <button type="submit" n class="btn btn-primary">Create</button>
+                                <button type="button" id="submit" class="btn btn-primary">Create</button>
                             </form>
                         </div>
 

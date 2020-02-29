@@ -1,7 +1,6 @@
 package guru.springframework.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -13,7 +12,7 @@ public class Ingredient {
     private Long id;
 
     private String description;
-    private BigDecimal ammount;
+    private BigDecimal amount;
 
     @OneToOne(fetch = FetchType.EAGER)
     private UnitOfMeasure uom;
@@ -26,9 +25,9 @@ public class Ingredient {
 
     }
 
-    public Ingredient(String description, BigDecimal ammount, UnitOfMeasure uom) {
+    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom) {
         this.description = description;
-        this.ammount = ammount;
+        this.amount = amount;
         this.uom = uom;
 
     }
@@ -50,12 +49,12 @@ public class Ingredient {
         this.description = description;
     }
 
-    public BigDecimal getAmmount() {
-        return ammount;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
-    public void setAmmount(BigDecimal ammount) {
-        this.ammount = ammount;
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     public Recipe getRecipe() {

@@ -1,5 +1,8 @@
 package guru.springframework.domain;
 
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,10 +13,15 @@ public class Notes {
     private Long id;
 
     @OneToOne // Recipe is the owner of the recipe
+    @JsonBackReference
     private Recipe recipe;
 
     @Lob // for too large strings/texts
     private String recipeNotes;
+
+    public Notes(){
+
+    }
 
     public Long getId() {
         return id;

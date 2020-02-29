@@ -60,7 +60,7 @@
                         <div class="row p-md-5">
                             <ul>
                                 <li th:each="ingredient: ${recipe.getIngredients()}">
-                                    <span th:text="${ingredient.getAmmount() +' '+ ingredient.getUom().getUom()+' of '+ingredient.getDescription()}"></span>
+                                    <span th:text="${ingredient.getAmount() +' '+ ingredient.getUom().getUom()+' of '+ingredient.getDescription()}"></span>
                                 </li>
 
                             </ul>

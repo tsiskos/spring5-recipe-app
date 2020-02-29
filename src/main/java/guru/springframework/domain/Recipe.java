@@ -33,6 +33,7 @@ public class Recipe {
     private Byte[] image;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Notes notes;
 
     @ManyToMany
