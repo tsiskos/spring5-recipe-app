@@ -70,7 +70,12 @@ $(document).ready(function(){
             type:"POST",
             data:JSON.stringify(form),
             contentType:"application/json; charset=utf-8",
-            dataType:"json"
+            dataType:"json",
+            statusCode:{
+                200: function(data){
+                    alert("OK");
+                    window.location.href = "/recipe/"+data.id;
+                }}
         });
     });
 });
